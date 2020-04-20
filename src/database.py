@@ -1,0 +1,37 @@
+import mysql.connector as conn
+
+
+class DataBase:
+    def __init__(self,
+                 host='localhost',
+                 port=3307,
+                 user='root',
+                 password='02042000',
+                 database='bank'):
+        self._conn = conn.connect(
+            host=host,
+            port=port,
+            user=user,
+            passwd=password,
+            database=database
+        )
+        self._cursor = self._conn.cursor()
+
+    def show_table(self, table, *fields):
+        self._cursor.execute(
+            'select\n' +
+            ('*' if len(fields) == 0 else ('%s' + ',%s' * (len(fields) - 1))) + '\n' +
+            'from ' + table, tuple(fields))
+        return tuple(x for x in self._cursor)
+
+    def exec(self, cmd):
+        self._cursor.execute(cmd)
+        return tuple(x for x in self._cursor)
+
+    def call_procedure(self, procedure):
+        self._cursor.execute('call ' + procedure)
+        return tuple(x for x in self._cursor)
+
+    def call_function(self, procedure):
+        self._cursor.execute('select ' + procedure)
+        return tuple(x for x in self._cursor)
