@@ -6,18 +6,17 @@ class DataBase:
                  host='localhost',
                  port=3307,
                  user='root',
-                 password='02042000',
-                 database='bank'):
+                 password='02042000'):
         self._conn = conn.connect(
             host=host,
             port=port,
             user=user,
             passwd=password,
-            database=database
+            database='bank'
         )
         self._cursor = self._conn.cursor()
 
-    def show_table(self, table, *fields):
+    def select_table(self, table, *fields):
         self._cursor.execute(
             'select\n' +
             ('*' if len(fields) == 0 else ('%s' + ',%s' * (len(fields) - 1))) + '\n' +
