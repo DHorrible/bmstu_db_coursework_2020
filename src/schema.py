@@ -16,6 +16,7 @@ class TableMetadata:
                 'type': attr_type
             })
             self._attr_map[attr_name] = self._attrs[len(self._attrs) - 1]
+            self.__setattr__(attr_name, utility.copy_str(attr_name))
 
     # Disable adding into table metadata (don't use method)
     def end_table(self):

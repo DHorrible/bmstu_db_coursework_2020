@@ -17,10 +17,10 @@ class DataBase:
         self._cursor = self._conn.cursor()
 
     def select_table(self, table, *fields):
-        self._cursor.execute(
+        self._cursor.execute(str.format(
             'select\n' +
-            ('*' if len(fields) == 0 else ('%s' + ',%s' * (len(fields) - 1))) + '\n' +
-            'from ' + table, tuple(fields))
+            ('*' if len(fields) == 0 else ('`t`.`{}`' + ',`t`.`{}`' * (len(fields) - 1))) + '\n' +
+            'from `' + table + '` as `t`', *fields))
         return tuple(x for x in self._cursor)
 
     def exec(self, cmd):
