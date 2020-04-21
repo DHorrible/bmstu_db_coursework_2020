@@ -1,5 +1,5 @@
 import mysql.connector as conn
-import string
+
 
 class DataBase:
     def __init__(self,
@@ -15,6 +15,9 @@ class DataBase:
             database='bank'
         )
         self._cursor = self._conn.cursor()
+
+    def __del__(self):
+        self._conn.close()
 
     def select_table(self, table, *fields):
         self._cursor.execute(str.format(
