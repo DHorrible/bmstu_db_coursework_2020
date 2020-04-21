@@ -1,5 +1,5 @@
 import mysql.connector as conn
-
+import string
 
 class DataBase:
     def __init__(self,
@@ -27,10 +27,14 @@ class DataBase:
         self._cursor.execute(cmd)
         return tuple(x for x in self._cursor)
 
-    def call_procedure(self, procedure):
-        self._cursor.execute('call ' + procedure)
-        return tuple(x for x in self._cursor)
+    def call_procedure(self, procedure, args=''):
+        return self.exec(
+            str.format('call %s(%s)',
+                       procedure,
+                       args))
 
-    def call_function(self, procedure):
-        self._cursor.execute('select ' + procedure)
-        return tuple(x for x in self._cursor)
+    def call_function(self, function, args=''):
+        return self.exec(
+            str.format('select %s(%s)',
+                       function,
+                       args))
