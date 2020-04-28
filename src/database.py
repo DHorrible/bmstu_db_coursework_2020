@@ -7,28 +7,28 @@ class DataBase:
                  port=3307,
                  user='root',
                  password='02042000'):
-        self._conn = conn.connect(
+        self.__conn = conn.connect(
             host=host,
             port=port,
             user=user,
             passwd=password,
             database='bank'
         )
-        self._cursor = self._conn.cursor()
+        self.__cursor = self.__conn.cursor()
 
     def __del__(self):
-        self._conn.close()
+        self.__conn.close()
 
     def select_table(self, table, *fields):
-        self._cursor.execute(str.format(
+        self.__cursor.execute(str.format(
             'select\n' +
             ('*' if len(fields) == 0 else ('`t`.`{}`' + ',`t`.`{}`' * (len(fields) - 1))) + '\n' +
             'from `' + table + '` as `t`', *fields))
-        return tuple(x for x in self._cursor)
+        return tuple(x for x in self.__cursor)
 
     def exec(self, cmd):
-        self._cursor.execute(cmd)
-        ret = tuple(x for x in self._cursor)
+        self.__cursor.execute(cmd)
+        ret = tuple(x for x in self.__cursor)
         if len(ret) == 1:
             all_none = True
             for x in ret[0]:

@@ -3,47 +3,47 @@ import src.utility as utility
 
 class TableMetadata:
     def __init__(self, table_name):
-        self._table_name = utility.copy_str(table_name)
-        self._attrs = []
-        self._attr_map = dict()
-        self._end_table = False
+        self.__table_name = utility.copy_str(table_name)
+        self.__attrs = []
+        self.__attr_map = dict()
+        self.__end_table = False
 
     # Add attribute in table metadata (don't use method)
     def add_attr(self, attr_name, attr_type):
-        if not self._end_table:
-            self._attrs.append({
+        if not self.__end_table:
+            self.__attrs.append({
                 'name': attr_name,
                 'type': attr_type
             })
-            self._attr_map[attr_name] = self._attrs[len(self._attrs) - 1]
+            self.__attr_map[attr_name] = self.__attrs[len(self.__attrs) - 1]
             self.__setattr__(attr_name, utility.copy_str(attr_name))
 
     # Disable adding into table metadata (don't use method)
     def end_table(self):
-        self._end_table = True
+        self.__end_table = True
 
     # Get number of attributes
     @property
     def count_attr(self):
-        return len(self._attrs)
+        return len(self.__attrs)
 
     # Check the existence of an attribute in a table
     def exist_attr(self, attr_name):
-        return attr_name in self._attr_map
+        return attr_name in self.__attr_map
 
     # Get attributes tuple
     @property
     def attrs(self):
-        return tuple([attr['name'] for attr in self._attrs])
+        return tuple([attr['name'] for attr in self.__attrs])
 
     # Get table name
     @property
-    def get_table_name(self):
-        return utility.copy_str(self._table_name)
+    def table_name(self):
+        return utility.copy_str(self.__table_name)
 
     # Get attribute type
     def get_attr_type(self, attr_name):
-        attr = self._attr_map.get(attr_name)
+        attr = self.__attr_map.get(attr_name)
         return None if attr is None else utility.copy_str(attr['type'])
 
 
@@ -129,18 +129,17 @@ report_info.add_attr('last_update', 'datetime')
 report_info.end_table()
 
 
-def get_tables():
-    return (
-        client,
-        account,
-        account_history,
-        transaction_history,
-        currency,
-        reason,
-        currency_rate,
-        reports,
-        report_info,
-    )
+tables = (
+    client,
+    account,
+    account_history,
+    transaction_history,
+    currency,
+    reason,
+    currency_rate,
+    reports,
+    report_info,
+)
 
 
 # Queries
@@ -166,12 +165,11 @@ query_5 = account
 
 query_6 = account
 
-def get_queries():
-    return (
-        query_1,
-        query_2,
-        query_3,
-        query_4,
-        query_5,
-        query_6,
-    )
+queries = (
+    query_1,
+    query_2,
+    query_3,
+    query_4,
+    query_5,
+    query_6,
+)
