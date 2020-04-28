@@ -28,7 +28,16 @@ class DataBase:
 
     def exec(self, cmd):
         self._cursor.execute(cmd)
-        return tuple(x for x in self._cursor)
+        ret = tuple(x for x in self._cursor)
+        if len(ret) == 1:
+            all_none = True
+            for x in ret[0]:
+                if x is not None:
+                    all_none = False
+                    break
+            if all_none:
+                return None
+        return ret
 
     def call_procedure(self, procedure, args=''):
         return self.exec(

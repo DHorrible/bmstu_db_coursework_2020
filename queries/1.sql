@@ -2,5 +2,5 @@ select
 	month(`datetime`) as `month`,
     count(*) as `transactions`
 from `transaction_history`
-where year(`datetime`) = 2017
+where year(`datetime`) = 2020
 order by `month`

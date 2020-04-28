@@ -23,6 +23,7 @@ class TableMetadata:
         self._end_table = True
 
     # Get number of attributes
+    @property
     def count_attr(self):
         return len(self._attrs)
 
@@ -31,10 +32,12 @@ class TableMetadata:
         return attr_name in self._attr_map
 
     # Get attributes tuple
-    def get_attrs(self):
-        return tuple(utility.copy_str(attr['name']) for attr in self._attrs)
+    @property
+    def attrs(self):
+        return tuple([attr['name'] for attr in self._attrs])
 
     # Get table name
+    @property
     def get_table_name(self):
         return utility.copy_str(self._table_name)
 
@@ -137,4 +140,38 @@ def get_tables():
         currency_rate,
         reports,
         report_info,
+    )
+
+
+# Queries
+query_1 = TableMetadata('query_1')
+query_1.add_attr('month', 'integer')
+query_1.add_attr('transactions', 'integer')
+query_1.end_table()
+
+query_2 = TableMetadata('query_2')
+query_2.add_attr('id', 'integer')
+query_2.add_attr('transactions', 'integer')
+query_2.end_table()
+
+query_3 = TableMetadata('query_3')
+query_3.add_attr('account_id', 'integer')
+query_3.add_attr('currency_name', 'varchar(45)')
+query_3.add_attr('income', 'float')
+query_3.end_table()
+
+query_4 = client
+
+query_5 = account
+
+query_6 = account
+
+def get_queries():
+    return (
+        query_1,
+        query_2,
+        query_3,
+        query_4,
+        query_5,
+        query_6,
     )

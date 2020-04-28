@@ -9,4 +9,4 @@ having max(
     and `ah`.`reason_id` = 3
     and `ah`.`old_balance` > `ah`.`balance`
     and month(`ah`.`datetime`) = 03
-    and year(`ah`.`datetime`) = 2017) = false
+    and year(`ah`.`datetime`) = 2019) = false
