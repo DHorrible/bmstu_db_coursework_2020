@@ -23,7 +23,7 @@
           <div class="col-3 d-flex align-items-center">
             <div class="nav flex-column" >
                 {% for button in query_buttons %}
-                    {% include 'include/reference.html' %}
+                    <a class="btn-info mb-3 rounded p-3 text-decoration-none active "  href="{{ button.href  }}"> {{ button.name }} </a>
                 {% endfor %}
             </div>
           </div>
@@ -33,7 +33,9 @@
             </div>
           </div>
     </div>
-    <footer class="d-block bg-dark fixed-bottom d-flex align-items-center justify-content-around" style="height: 6vh; border-radius: 25px 25px 0 0;">
+    </br>
+    </br>
+    <footer class="d-block bg-info fixed-bottom d-flex align-items-center justify-content-around" style="height: 6vh; border-radius: 25px 25px 0 0;">
             <h5 class="text-light mt-2">Выполнил студент РК6-42б Шипилов Павел</h5>
     </footer>
 </div>
