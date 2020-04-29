@@ -22,7 +22,7 @@
             </tbody>
         </table>
     {% else %}
-         <h1 class="text-center"> Нет данных, удволетворяющих запросу</h1>
+        <h1 class="text-center">{{ error }}</h1>
     {% endif %}
     <a href="/" class="btn mt-5  btn-outline-dark btn-lg btn-block" >Назад</a>
 {% endblock %}

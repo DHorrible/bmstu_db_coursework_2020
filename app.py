@@ -15,31 +15,32 @@ def main_page():
                            to_report_button=buttons.create_report)
 
 
-@app.route('/query/<int:num>')
+@app.route('/query/<int:num>', methods=['GET', 'POST'])
 def exec_query(num):
     if num < 0 or num > 6:
         return '{"status": "error", "msg": "incorrect number"}'
+    if num == 3 and request.method == 'GET':
+        return render_template('query_form.html')
+    query = utility.get_query(num)
+    if num == 3 and request.method == 'POST':
+        query = str.format(query, request.form['account_id'])
+    res, met = db.exec(query)
     return render_template('table.html',
-                           result=db.exec(utility.get_query(num)),
-                           metadata=schema.queries[num - 1].attrs)
-
-
-@app.route('/function')
-def exec_func(name):
-    # args = request.args.get('args', type=str, default='')
-    # res = db.call_function(name, args)
-    return '{"status": "ok", "msg": "coming soon"}'
+                           result=res,
+                           metadata=met,
+                           error='Нет данных, удволетворяющих запросу')
 
 
 @app.route('/report', methods=['GET', 'POST'])
 def update_report():
-    client_id = request.args.get('client_id')
-    if request.method == "POST":
-        client_id = request.args.get('client_id')
+    if request.method == 'POST':
+        client_id = request.form['client_id']
         db.call_procedure('update_report', client_id)
+        res, met = db.call_procedure('get_last_report', client_id)
         return render_template('table.html',
-                               result=db.call_procedure('get_last_report', client_id),
-                               metadata=schema.reports.attrs)
+                               result=res,
+                               metadata=met,
+                               error='Нет клиента с таким номером договора')
     else:
         return render_template('report_form.html')
 

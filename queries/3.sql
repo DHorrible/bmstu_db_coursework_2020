@@ -7,5 +7,5 @@ inner join `account` as `a`
 	on `a`.`id` = `ah`.`account_id`
 inner join `currency` as `c`
 	on `c`.`id` = `a`.`currency_id`
-where `ah`.`account_id` = 'XXX'
+where `ah`.`account_id` = '{}'
 	and `ah`.`old_balance` < `ah`.`balance`
