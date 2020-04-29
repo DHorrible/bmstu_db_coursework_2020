@@ -4,7 +4,7 @@ import mysql.connector as conn
 class DataBase:
     def __init__(self,
                  host='localhost',
-                 port=3307,
+                 port=3308,
                  user='root',
                  password='02042000'):
         self.__conn = conn.connect(
@@ -12,7 +12,7 @@ class DataBase:
             port=port,
             user=user,
             passwd=password,
-            database='bank'
+            database='port'
         )
         self.__cursor = self.__conn.cursor()
 

@@ -3,10 +3,26 @@
 {% block content %}
     <form action="" method="post"  class="d-flex flex-column align-content-around" style="width: 50%">
         <div class="form-group">
-            <label>Номер счета клиента</label>
-            <input type="number" min="0" max="200000000" class="form-control" name="account_id" placeholder="Номер счета">
+            <label>Месяц</label>
+                <select name="month" class="form-control">
+                    <option value="1">Январь</option>
+                    <option value="2">Февраль</option>
+                    <option value="3">Март</option>
+                    <option value="4">Апрель</option>
+                    <option value="5">Май</option>
+                    <option value="6">Июнь</option>
+                    <option value="7">Июль</option>
+                    <option value="8">Август</option>
+                    <option value="9">Сентябрь</option>
+                    <option value="10">Октябрь</option>
+                    <option value="11">Ноябрь</option>
+                    <option value="12">Декабрь</option>
+                </select>
+            </div>
+        <div class="form-group">
+            <label>Год</label>
+            <input type="number" min="2000" max="2100"  class="form-control" name="year">
         </div>
         <button type="submit" class="btn btn-lg  btn-info">Выполнить запрос</button>
-        <a href="/" class="btn mt-3 btn-outline-info btn-lg btn-block">Назад</a>
     </form>
 {% endblock %}
