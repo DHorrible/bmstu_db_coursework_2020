@@ -1,6 +1,5 @@
 import src.buttons as buttons
 import src.utility as utility
-import src.schema as schema
 from src.database import DataBase
 from flask import Flask, request, render_template
 
